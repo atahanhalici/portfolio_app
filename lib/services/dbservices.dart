@@ -76,7 +76,7 @@ class DbServices {
       },
       "Referanslarım": {
         "Süleyman Şanlıtürk": {
-          "link": "null",
+          "link": "assets/icons/man.png",
           "aciklama": "Atlas Yazılım - Yazılım Geliştirici",
           "tarih": "Haziran 2022"
         },

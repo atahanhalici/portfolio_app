@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Atahan Halıcı Portfolyo',
+      title: 'Atahan Halıcı Portfolio',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Poppins",
