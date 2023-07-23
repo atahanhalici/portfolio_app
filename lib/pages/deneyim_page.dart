@@ -716,7 +716,7 @@ Column deneme(DetayViewModel detayModel, int index) {
           );
         },
         child: Container(
-          height: 35,
+          height: 50,
           decoration: BoxDecoration(
               color: const Color.fromARGB(197, 250, 191, 216),
               borderRadius: BorderRadius.circular(20)),
@@ -725,7 +725,7 @@ Column deneme(DetayViewModel detayModel, int index) {
               "Proje Detayına Git",
               style: TextStyle(
                   fontFamily: "Poppins",
-                  fontSize: 12,
+                  fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
