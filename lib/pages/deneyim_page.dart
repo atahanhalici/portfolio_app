@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:portfolio_app/viewmodels/detay_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class DeneyimPage extends StatefulWidget {
   const DeneyimPage({Key? key}) : super(key: key);
@@ -53,6 +55,7 @@ class _DeneyimPageState extends State<DeneyimPage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     DetayViewModel _detayModel =
         Provider.of<DetayViewModel>(context, listen: true);
     return SafeArea(
@@ -80,8 +83,7 @@ class _DeneyimPageState extends State<DeneyimPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 20.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
                             _detayModel.title,
                             style: const TextStyle(
@@ -566,16 +568,174 @@ Expanded detayKutu(ScrollController controller, DetayViewModel detayModel) {
             height: 20,
           ),
           Expanded(
-            child: ListView.builder(
-                controller: controller,
-                itemCount: gecerli[detayModel.menuAdi]!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return baslikaciklamaicontarih(detayModel, index, gecerli);
-                }),
+            child: detayModel.menuAdi == "Projelerim"
+                ? myProjects(controller, detayModel)
+                : ListView.builder(
+                    controller: controller,
+                    itemCount: gecerli[detayModel.menuAdi]!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return baslikaciklamaicontarih(
+                          detayModel, index, gecerli);
+                    }),
           ),
         ],
       ),
     ),
+  );
+}
+
+ListView myProjects(ScrollController controller, DetayViewModel detayModel) {
+  return ListView.builder(
+      shrinkWrap: true,
+      controller: controller,
+      itemCount: detayModel.projelerim.length,
+      itemBuilder: (context, index) {
+        return Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: detayModel.backgroundColor,
+                  borderRadius: BorderRadius.circular(20)),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                //  decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+                child: Center(
+                  child: ExpansionTile(
+                      leading: Image.asset(
+                        "assets/githublogo.png",
+                        width: 30,
+                        height: 30,
+                      ),
+                      iconColor: Colors.white,
+                      collapsedIconColor: Colors.white,
+                      title: Text(
+                        detayModel.projelerim[index].adi,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      children: [deneme(detayModel, index)]),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        );
+      });
+}
+
+Column deneme(DetayViewModel detayModel, int index) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(
+        height: 5,
+      ),
+      Image.asset(
+        "assets/githublogo.png",
+        width: 40,
+        height: 40,
+      ),
+      Text(
+        detayModel.projelerim[index].adi,
+        style: const TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold),
+      ),
+      Visibility(
+        visible: detayModel.projelerim[index].aciklama != "" ? true : false,
+        child: Text(
+          detayModel.projelerim[index].aciklama,
+          style: const TextStyle(
+              fontFamily: "Poppins",
+              fontSize: 13,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: detayModel.projelerim[index].kodyuzde.length,
+          itemBuilder: (BuildContext context, int i) {
+            double yuzde =
+                detayModel.projelerim[index].kodyuzde.values.toList()[i] / 100;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LinearPercentIndicator(
+                  animation: true,
+                  lineHeight: 25.0,
+                  animationDuration: 1500,
+                  percent: yuzde,
+                  center: Text(
+                    // ignore: prefer_interpolation_to_compose_strings
+                    detayModel.projelerim[index].kodyuzde.keys
+                            .toList()[i]
+                            .toString() +
+                        ": %" +
+                        detayModel.projelerim[index].kodyuzde.values
+                            .toList()[i]
+                            .toStringAsFixed(2),
+                    style: const TextStyle(
+                        fontFamily: "Poppins",
+                        color: Color.fromARGB(197, 255, 114, 173),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  barRadius: const Radius.circular(20),
+                  progressColor: Colors.white,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            );
+          }),
+      const SizedBox(
+        height: 15,
+      ),
+      InkWell(
+        onTap: () async {
+          await launchUrlString(
+            detayModel.projelerim[index].link,
+            mode: LaunchMode.externalNonBrowserApplication,
+          );
+        },
+        child: Container(
+          height: 35,
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(197, 250, 191, 216),
+              borderRadius: BorderRadius.circular(20)),
+          child: const Center(
+            child: Text(
+              "Proje Detayına Git",
+              style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 15,
+      ),
+    ],
   );
 }
 

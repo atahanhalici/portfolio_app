@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_app/pages/deneyim_page.dart';
-import 'package:portfolio_app/pages/home_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:portfolio_app/pages/splash_screen.dart';
 import 'package:portfolio_app/route_generator.dart';
 import 'package:portfolio_app/viewmodels/detay_viewmodel.dart';
@@ -9,6 +8,10 @@ import 'package:provider/provider.dart';
 import 'locator.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   setupLocator();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => DetayViewModel()),

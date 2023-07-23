@@ -1,6 +1,6 @@
 class DbServices {
   Future<Map<String, Map>> hakkimdaGetir() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     Map<String, Map> hakkimda = {
       "Ben Kimim": {
         "Atahan Halıcı Hakkında": {
@@ -43,7 +43,7 @@ class DbServices {
           "tarih": "2017-2021"
         },
         "Gülsüm Sami Kefeli Ortaokulu": {
-          "link": "assets/gsklogo.jpg",
+          "link": "assets/gsklogo.png",
           "aciklama": "Gülsüm Sami Kefeli Ortaokulu mezunuyum.",
           "tarih": "2017-2021"
         },
@@ -58,11 +58,8 @@ class DbServices {
   }
 
   deneyimGetir() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     Map<String, Map> deneyimlerim = {
-      "Projelerim": {
-        "": {"link": "null", "aciklama": "", "tarih": "null"},
-      },
       "Deneyimlerim": {
         "Co-Founder of Faba Software": {
           "link": "assets/fabalogo2.png",
@@ -89,7 +86,7 @@ class DbServices {
   }
 
   nitelikGetir() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     Map<String, Map> niteliklerim = {
       "Niteliklerim": {
         "Mobile Developer": {

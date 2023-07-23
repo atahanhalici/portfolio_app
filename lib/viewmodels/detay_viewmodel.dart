@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/locator.dart';
+import 'package:portfolio_app/models/proje.dart';
 
 import '../repository/repository.dart';
 
@@ -15,6 +16,7 @@ class DetayViewModel with ChangeNotifier {
   Map<String, Map> hakkimda = {};
   Map<String, Map> niteliklerim = {};
   Map<String, Map> deneyimlerim = {};
+  List<Projeler> projelerim = [];
   set state(ViewState value) {
     _state = value;
     notifyListeners();
@@ -56,7 +58,7 @@ class DetayViewModel with ChangeNotifier {
     hakkimda = await _repository.hakkimdaGetir();
     niteliklerim = await _repository.nitelikGetir();
     deneyimlerim = await _repository.deneyimGetir();
-    await _repository.projeGetir();
+    projelerim = await _repository.projeGetir();
     notifyListeners();
   }
 }

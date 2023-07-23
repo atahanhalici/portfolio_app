@@ -78,6 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void anasayfayagec() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     DetayViewModel _detayModel =
         Provider.of<DetayViewModel>(context, listen: false);
     await _detayModel.detayGetir();

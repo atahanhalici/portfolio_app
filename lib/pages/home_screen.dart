@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     DetayViewModel _detayModel =
         Provider.of<DetayViewModel>(context, listen: true);
     Color textColor = const Color.fromARGB(255, 25, 41, 73);
@@ -285,15 +286,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 150, 47, 191),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Instagram",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/instalogo.png"),
+                        ),
+                        const Text(
+                          "İnstagram",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/instalogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -316,15 +333,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 29, 161, 242),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Twitter",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/twitterlogo.png"),
+                        ),
+                        const Text(
+                          "Twitter",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/twitterlogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -347,15 +380,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 20, 23, 26),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Threads",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/threadslogo.png"),
+                        ),
+                        const Text(
+                          "Threads",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/threadslogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -378,15 +427,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 0, 119, 181),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "LinkedIn",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/linkedinlogo.png"),
+                        ),
+                        const Text(
+                          "Linkedin",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/linkedinlogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -409,15 +474,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 23, 21, 21),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "Github",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/githublogo.png"),
+                        ),
+                        const Text(
+                          "Github",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/githublogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -437,15 +518,31 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 0, 114, 198),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Center(
-                      child: Text(
-                        "E-Mail",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 25,
+                          height: 25,
+                          child: Image.asset("assets/maillogo.png"),
+                        ),
+                        const Text(
+                          "E-Mail",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Opacity(
+                            opacity: 0,
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Image.asset("assets/maillogo.png"),
+                            )),
+                      ],
                     ),
                   ),
                 ),
