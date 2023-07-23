@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/viewmodels/detay_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -55,88 +56,98 @@ class _DeneyimPageState extends State<DeneyimPage> {
     DetayViewModel _detayModel =
         Provider.of<DetayViewModel>(context, listen: true);
     return SafeArea(
-        child: Container(
-            decoration: BoxDecoration(color: _detayModel.backgroundColor),
-            child: Scaffold(
-                appBar: AppBar(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                ),
+        child: CustomRefreshIndicator(
+      onRefresh: () async {
+        await _detayModel.detayGetir();
+      },
+      builder: MaterialIndicatorDelegate(
+        builder: (context, controller) {
+          return Image.asset("assets/bm3.png");
+        },
+      ),
+      child: Container(
+          decoration: BoxDecoration(color: _detayModel.backgroundColor),
+          child: Scaffold(
+              appBar: AppBar(
+                elevation: 0,
                 backgroundColor: Colors.transparent,
-                body: Stack(
-                  children: [
-                    Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text(
-                              _detayModel.title,
-                              style: const TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 27,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
+              ),
+              backgroundColor: Colors.transparent,
+              body: Stack(
+                children: [
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text(
+                            _detayModel.title,
+                            style: const TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 27,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          butonlar(_detayModel),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          detayKutu(_scrollController, _detayModel)
-                        ]),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width),
-                    Visibility(
-                      visible: _gizli,
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween<double>(begin: -300, end: 0),
-                        duration: const Duration(seconds: 2),
-                        builder:
-                            (BuildContext context, double size, Widget? child) {
-                          return Positioned(
-                            right: 0,
-                            bottom: size,
-                            child: SizedBox(
-                                height: MediaQuery.of(context).size.height / 3,
-                                width: MediaQuery.of(context).size.width / 3,
-                                child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Image.asset("assets/bm3.png"))),
-                          );
-                        },
-                        child: const Icon(Icons.aspect_ratio),
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        butonlar(_detayModel),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        detayKutu(_scrollController, _detayModel)
+                      ]),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width),
+                  Visibility(
+                    visible: _gizli,
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween<double>(begin: -300, end: 0),
+                      duration: const Duration(seconds: 2),
+                      builder:
+                          (BuildContext context, double size, Widget? child) {
+                        return Positioned(
+                          right: 0,
+                          bottom: size,
+                          child: SizedBox(
+                              height: MediaQuery.of(context).size.height / 3,
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Image.asset("assets/bm3.png"))),
+                        );
+                      },
+                      child: const Icon(Icons.aspect_ratio),
                     ),
-                    Visibility(
-                      visible: !_gizli,
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween<double>(begin: 0, end: -300),
-                        duration: const Duration(seconds: 2),
-                        builder:
-                            (BuildContext context, double size, Widget? child) {
-                          return Positioned(
-                            right: 0,
-                            bottom: size,
-                            child: SizedBox(
-                                height: MediaQuery.of(context).size.height / 3,
-                                width: MediaQuery.of(context).size.width / 3,
-                                child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Image.asset("assets/bm3.png"))),
-                          );
-                        },
-                        child: const Icon(Icons.aspect_ratio),
-                      ),
+                  ),
+                  Visibility(
+                    visible: !_gizli,
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween<double>(begin: 0, end: -300),
+                      duration: const Duration(seconds: 2),
+                      builder:
+                          (BuildContext context, double size, Widget? child) {
+                        return Positioned(
+                          right: 0,
+                          bottom: size,
+                          child: SizedBox(
+                              height: MediaQuery.of(context).size.height / 3,
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Image.asset("assets/bm3.png"))),
+                        );
+                      },
+                      child: const Icon(Icons.aspect_ratio),
                     ),
-                  ],
-                ))));
+                  ),
+                ],
+              ))),
+    ));
   }
 
   Widget butonlar(DetayViewModel detayModel) {
@@ -354,6 +365,46 @@ class _DeneyimPageState extends State<DeneyimPage> {
               ],
             ),
           ),
+          GestureDetector(
+            onTap: () {
+              if (detayModel.menuAdi != "Referanslarım") {
+                detayModel.menuDegis("Referanslarım");
+                _scrollController
+                    .jumpTo(_scrollController.position.minScrollExtent);
+              }
+            },
+            child: Column(
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: detayModel.menuAdi == "Referanslarım"
+                          ? Colors.white
+                          : const Color.fromARGB(197, 250, 191, 216),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                    child: Image.asset(detayModel.menuAdi == "Referanslarım"
+                        ? "assets/icons/referanspembe.png"
+                        : "assets/icons/referans.png"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Referanslarım",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 12,
+                      color: detayModel.menuAdi == "Referanslarım"
+                          ? Colors.white
+                          : const Color.fromARGB(169, 255, 255, 255),
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ),
         ],
       );
     } else {
@@ -487,6 +538,11 @@ class _DeneyimPageState extends State<DeneyimPage> {
 }
 
 Expanded detayKutu(ScrollController controller, DetayViewModel detayModel) {
+  Map gecerli = detayModel.title == "Hakkımda"
+      ? detayModel.hakkimda
+      : detayModel.title == "Deneyimlerim"
+          ? detayModel.deneyimlerim
+          : detayModel.niteliklerim;
   return Expanded(
     child: Container(
       padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
@@ -506,79 +562,102 @@ Expanded detayKutu(ScrollController controller, DetayViewModel detayModel) {
                 color: Color.fromARGB(255, 54, 72, 100),
                 fontWeight: FontWeight.bold),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
-            child: SingleChildScrollView(
-              controller: controller,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "What is Lorem Ipsum?",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 54, 72, 100),
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 12,
-                      color: Color.fromARGB(255, 160, 175, 196),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "What is Lorem Ipsum?",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 54, 72, 100),
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 12,
-                      color: Color.fromARGB(255, 160, 175, 196),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "What is Lorem Ipsum?",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 54, 72, 100),
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 12,
-                      color: Color.fromARGB(255, 160, 175, 196),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
+            child: ListView.builder(
+                controller: controller,
+                itemCount: gecerli[detayModel.menuAdi]!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return baslikaciklamaicontarih(detayModel, index, gecerli);
+                }),
           ),
         ],
       ),
     ),
+  );
+}
+
+Column baslikaciklamaicontarih(
+    DetayViewModel detayModel, int index, Map gecerli) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  gecerli[detayModel.menuAdi]!.keys.toList()[index],
+                  style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 54, 72, 100),
+                      fontWeight: FontWeight.bold),
+                ),
+                Visibility(
+                  visible: gecerli[detayModel.menuAdi]!.values.toList()[index]
+                              ["tarih"] !=
+                          "null"
+                      ? true
+                      : false,
+                  child: Text(
+                    gecerli[detayModel.menuAdi]!
+                        .values
+                        .toList()[index]["tarih"]
+                        .toString(),
+                    style: const TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 13,
+                        color: Color.fromARGB(255, 54, 72, 100),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Visibility(
+            visible: gecerli[detayModel.menuAdi]!.values.toList()[index]
+                        ["link"] !=
+                    "null"
+                ? true
+                : false,
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: Image.asset(
+                gecerli[detayModel.menuAdi]!
+                    .values
+                    .toList()[index]["link"]
+                    .toString(),
+              ),
+            ),
+          )
+        ],
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      Text(
+        gecerli[detayModel.menuAdi]!
+            .values
+            .toList()[index]["aciklama"]
+            .toString(),
+        style: const TextStyle(
+          fontFamily: "Poppins",
+          fontSize: 13,
+          color: Color.fromARGB(255, 54, 72, 100),
+        ),
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+    ],
   );
 }

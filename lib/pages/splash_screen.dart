@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_app/viewmodels/detay_viewmodel.dart';
+import 'package:provider/provider.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      anasayfayagec();
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,5 +75,14 @@ class SplashScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void anasayfayagec() async {
+    DetayViewModel _detayModel =
+        Provider.of<DetayViewModel>(context, listen: false);
+    await _detayModel.detayGetir();
+
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacementNamed(context, "/anasayfa");
   }
 }

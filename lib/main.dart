@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Poppins",
         primarySwatch: Colors.blueGrey,
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
       onGenerateRoute: RouteGenerator.rotaOlustur,
     );
   }

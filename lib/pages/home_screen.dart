@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/viewmodels/detay_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -95,20 +97,25 @@ class HomePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          height: 35,
-                          width: 105,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 188, 130, 255),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: const Center(
-                            child: Text(
-                              "Bana Ulaş",
-                              style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                        InkWell(
+                          onTap: () {
+                            banaUlas(context);
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 105,
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 188, 130, 255),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: const Center(
+                              child: Text(
+                                "Bana Ulaş",
+                                style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
@@ -193,6 +200,7 @@ class HomePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             _detayModel.nitelikgetir();
+
                             Navigator.pushNamed(context, "/detay");
                           },
                           child: Container(
@@ -231,6 +239,235 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  banaUlas(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                "Bana Ulaş",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.0))),
+          contentPadding: const EdgeInsets.all(10.0),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrlString(
+                      "https://www.instagram.com/atahanhalici/",
+                      mode: LaunchMode.externalNonBrowserApplication,
+                    );
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 105,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 150, 47, 191),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "Instagram",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrlString(
+                      "https://twitter.com/atahanhalici",
+                      mode: LaunchMode.externalNonBrowserApplication,
+                    );
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 105,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 29, 161, 242),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "Twitter",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrlString(
+                      "https://www.threads.net/@atahanhalici",
+                      mode: LaunchMode.externalNonBrowserApplication,
+                    );
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 105,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 20, 23, 26),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "Threads",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrlString(
+                      "https://www.linkedin.com/in/atahan-hal%C4%B1c%C4%B1-698194228/",
+                      mode: LaunchMode.externalNonBrowserApplication,
+                    );
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 105,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 0, 119, 181),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "LinkedIn",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrlString(
+                      "https://github.com/atahanhalici",
+                      mode: LaunchMode.externalNonBrowserApplication,
+                    );
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 105,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 23, 21, 21),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "Github",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () async {
+                    Uri mail = Uri.parse("mailto:atahanhalici@gmail.com");
+                    await launchUrl(mail);
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 35,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 0, 114, 198),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Center(
+                      child: Text(
+                        "E-Mail",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Kapat",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  color: Colors.black,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

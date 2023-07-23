@@ -19,7 +19,8 @@ class RouteGenerator {
         return _gidilecekrota(const HomePage());
       case '/detay':
         return _gidilecekrota(const DeneyimPage());
-
+      case '/anasayfa':
+        return _gidilecekrota(const HomePage());
       default:
         return _gidilecekrota(const HomePage());
     }

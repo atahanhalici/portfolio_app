@@ -12,37 +12,51 @@ class DetayViewModel with ChangeNotifier {
   Color backgroundColor = Colors.white;
   String title = "";
   String menuAdi = "";
+  Map<String, Map> hakkimda = {};
+  Map<String, Map> niteliklerim = {};
+  Map<String, Map> deneyimlerim = {};
   set state(ViewState value) {
     _state = value;
     notifyListeners();
   }
 
-  deneyimgetir() {
+  deneyimgetir() async {
     state = ViewState.geliyor;
     backgroundColor = const Color.fromARGB(255, 241, 151, 188);
     title = "Deneyimlerim";
     menuAdi = "Projelerim";
+
     state = ViewState.deneyim;
   }
 
-  hakkimdagetir() {
+  hakkimdagetir() async {
     state = ViewState.geliyor;
     backgroundColor = const Color.fromARGB(255, 124, 200, 210);
     title = "Hakkımda";
     menuAdi = "Ben Kimim";
+
     state = ViewState.hakkimda;
   }
 
-  nitelikgetir() {
+  nitelikgetir() async {
     state = ViewState.geliyor;
     backgroundColor = const Color.fromARGB(255, 150, 176, 238);
     title = "Niteliklerim";
     menuAdi = "Niteliklerim";
+
     state = ViewState.niteliklerim;
   }
 
   menuDegis(String newMenuAdi) {
     menuAdi = newMenuAdi;
+    notifyListeners();
+  }
+
+  detayGetir() async {
+    hakkimda = await _repository.hakkimdaGetir();
+    niteliklerim = await _repository.nitelikGetir();
+    deneyimlerim = await _repository.deneyimGetir();
+    await _repository.projeGetir();
     notifyListeners();
   }
 }
