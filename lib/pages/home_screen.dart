@@ -263,7 +263,7 @@ class HomePage extends StatelessWidget {
           ),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(25.0))),
-          contentPadding: const EdgeInsets.all(10.0),
+          contentPadding: const EdgeInsets.all(20.0),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
